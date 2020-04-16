@@ -55,5 +55,13 @@ class Pokemon:
         return attack_damage
 
 
+class Trainer:
+    def __init__(self, pokemons, name, num_of_potions, active_pokemon):
+        self.pokemons = pokemons
+        self.name = name
+        self.num_of_potions = num_of_potions
+        self.active_pokemon = active_pokemon
+
+
 
 
