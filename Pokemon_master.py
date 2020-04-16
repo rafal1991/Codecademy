@@ -26,6 +26,34 @@ class Pokemon:
             self.is_knocked_out = False
             print(self.is_knocked_out)
 
+    def attack(self, opposite_pokemon):
+        self.opposite_pokemon = opposite_pokemon
+        if self.opposite_pokemon.type == "grass":
+            if self.type == "grass":
+                attack_multiplier = 1
+            if self.type == "water"
+                attack_multiplier = 0.5
+            if self.type == "fire":
+                attack_multiplier = 2
+        if self.opposite_pokemon.type == "water":
+            if self.type == "grass":
+                attack_multiplier = 2
+            if self.type == "water"
+                attack_multiplier = 1
+            if self.type == "fire":
+                attack_multiplier = 0.5
+        if self.opposite_pokemon.type == "fire":
+            if self.type == "grass":
+                attack_multiplier = 0.5
+            if self.type == "water"
+                attack_multiplier = 2
+            if self.type == "fire":
+                attack_multiplier = 1
+
+        attack_damage = self.level * attack_multiplier
+        print("{name} is dealing {damage} damage to the opposite pokemon".format(name=self.name, damage=attack_damage))
+        return attack_damage
+
 
 
 
