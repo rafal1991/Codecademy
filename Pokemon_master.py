@@ -12,13 +12,17 @@ class Pokemon:
         print("{name} now has {health} health".format(name=self.name, health=self.current_health))
 
     def regain_health(self, health_gain):
-        self.current_health = self.current_health + health_gain
+        after_potion = self.current_health + health_gain
+        if after_potion < self.maximum_health:
+            self.current_health = self.current_health + health_gain
+        if after_potion > self.maximum_health:
+            self.current_health = self.maximum_health
         print("{name} now has {health} health".format(name=self.name, health=self.current_health))
 
     def knock_out(self):
         if self.current_health <= 0:
             self.is_knocked_out = True
-            print("{name} is now knocked out".format(name=self.name)
+            print("{name} is now knocked out".format(name=self.name))
 
     def revive(self):
         if self.current_health <= 0:
@@ -30,21 +34,21 @@ class Pokemon:
         if self.opposite_pokemon.type == "grass":
             if self.type == "grass":
                 attack_multiplier = 1
-            if self.type == "water"
+            if self.type == "water":
                 attack_multiplier = 0.5
             if self.type == "fire":
                 attack_multiplier = 2
         if self.opposite_pokemon.type == "water":
             if self.type == "grass":
                 attack_multiplier = 2
-            if self.type == "water"
+            if self.type == "water":
                 attack_multiplier = 1
             if self.type == "fire":
                 attack_multiplier = 0.5
         if self.opposite_pokemon.type == "fire":
             if self.type == "grass":
                 attack_multiplier = 0.5
-            if self.type == "water"
+            if self.type == "water":
                 attack_multiplier = 2
             if self.type == "fire":
                 attack_multiplier = 1
@@ -54,22 +58,31 @@ class Pokemon:
         return attack_damage
 
 
-class Trainer:
-    def __init__(self, pokemons, trainer_name, num_of_potions, active_pokemon):
+class Trainer(Pokemon):
+    def __init__(self, pokemons, trainer_name, num_of_potions, active_pokemon, name, level, type, current_health,
+                 is_knocked_out):
+        super().__init__(name, level, type, current_health, is_knocked_out)
         self.pokemons = pokemons
         self.trainer_name = trainer_name
         self.num_of_potions = num_of_potions
-        self.active_pokemon = active_pokemon
+        self.active_pokemon = self.pokemons[active_pokemon -1]
 
     def use_potion(self):
-        self.active_pokemon
-        print()
-        return
+        # reduces num_of_potions by 1
+        # heals active pokemon
 
-    def attack_trainer(self):
+        potion_healing = self.regain_health(16)
+        self.active_pokemon.current_health = self.active_pokemon.potion_healing
+        self.num_of_potions += -1
+        print('Your pokemon has been healed')
 
-        print()
-        return
+    def attack_trainer(self, trainer_to_attack):
+        # give damage to another trainer's active pokemon
+        pokemon_we_attack = trainer_to_attack.active_pokemon
+        attack_damage = self.attack(pokemon_we_attack)
+        self.attack(pokemon_we_attack.lose_health(attack_damage))
+        print("Your pokemon delt " + str(attack_damage) + " damage")
+
 
     def switch_pokemon(self, pokemon_number):
 
