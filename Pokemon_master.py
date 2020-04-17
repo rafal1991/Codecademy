@@ -1,5 +1,5 @@
 class Pokemon:
-    def __init__(self, name, level, type, current_health, is_knocked_out ):
+    def __init__(self, name, level, type, is_knocked_out ):
         self.name = name
         self.level = level
         self.type = type
@@ -85,22 +85,18 @@ class Trainer(Pokemon):
 
 
     def switch_pokemon(self, pokemon_number):
-
-        print()
-        return
-
-    def attack_active_pokemon(self):
-
-        print()
-        return
+        self.active_pokemon = self.pokemons[pokemon_number - 1]
+        print("You chose {name}".format(name=self.active_pokemon.name))
 
 
-charmander = Pokemon('charmander', 7, 'fire', current_health=self.maximum_health, False)
-bulbasaur = Pokemon('bulbasaur', 9, 'grass', current_health=self.maximum_health, False)
-squirtle = Pokemon('squirtle', 11, 'water', current_health=self.maximum_health, False)
-celebi = Pokemon('celebi', 11, 'grass', current_health=self.maximum_health, False)
-lapras = Pokemon('lapras', 9, 'water', current_health=self.maximum_health, False)
-growlithe = Pokemon('growlithe', 7, 'fire', current_health=self.maximum_health, False)
+
+
+charmander = Pokemon('charmander', 7, 'fire', False)
+bulbasaur = Pokemon('bulbasaur', 9, 'grass', False)
+squirtle = Pokemon('squirtle', 11, 'water', False)
+celebi = Pokemon('celebi', 11, 'grass', False)
+lapras = Pokemon('lapras', 9, 'water', False)
+growlithe = Pokemon('growlithe', 7, 'fire', False)
 
 Ash_keczap = Trainer([charmander, bulbasaur, squirtle], "Ash", 3, 1)
 justin_timberlake = Trainer([celebi, lapras, growlithe], "Justin", 3, 1)
