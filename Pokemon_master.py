@@ -1,10 +1,9 @@
 class Pokemon:
-    def __init__(self, name, level, type, maximum_health,
-                 current_health, is_knocked_out ):
+    def __init__(self, name, level, type, current_health, is_knocked_out ):
         self.name = name
         self.level = level
         self.type = type
-        self.maximum_health = maximum_health
+        self.maximum_health = self.level * 5
         self.current_health = current_health
         self.is_knocked_out = is_knocked_out
 
@@ -56,12 +55,41 @@ class Pokemon:
 
 
 class Trainer:
-    def __init__(self, pokemons, name, num_of_potions, active_pokemon):
+    def __init__(self, pokemons, trainer_name, num_of_potions, active_pokemon):
         self.pokemons = pokemons
-        self.name = name
+        self.trainer_name = trainer_name
         self.num_of_potions = num_of_potions
         self.active_pokemon = active_pokemon
 
+    def use_potion(self):
+        self.active_pokemon
+        print()
+        return
 
+    def attack_trainer(self):
+
+        print()
+        return
+
+    def switch_pokemon(self, pokemon_number):
+
+        print()
+        return
+
+    def attack_active_pokemon(self):
+
+        print()
+        return
+
+
+charmander = Pokemon('charmander', 7, 'fire', current_health=self.maximum_health, False)
+bulbasaur = Pokemon('bulbasaur', 9, 'grass', current_health=self.maximum_health, False)
+squirtle = Pokemon('squirtle', 11, 'water', current_health=self.maximum_health, False)
+celebi = Pokemon('celebi', 11, 'grass', current_health=self.maximum_health, False)
+lapras = Pokemon('lapras', 9, 'water', current_health=self.maximum_health, False)
+growlithe = Pokemon('growlithe', 7, 'fire', current_health=self.maximum_health, False)
+
+Ash_keczap = Trainer([charmander, bulbasaur, squirtle], "Ash", 3, 1)
+justin_timberlake = Trainer([celebi, lapras, growlithe], "Justin", 3, 1)
 
 
