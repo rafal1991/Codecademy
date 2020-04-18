@@ -1,10 +1,10 @@
 class Pokemon:
-    def __init__(self, name, level, type, is_knocked_out ):
+    def __init__(self, name, level, type, is_knocked_out):
         self.name = name
         self.level = level
         self.type = type
         self.maximum_health = self.level * 5
-        self.current_health = current_health
+        self.current_health = self.maximum_health
         self.is_knocked_out = is_knocked_out
 
     def lose_health(self, health_loss):
@@ -59,9 +59,8 @@ class Pokemon:
 
 
 class Trainer(Pokemon):
-    def __init__(self, pokemons, trainer_name, num_of_potions, active_pokemon, name, level, type, current_health,
-                 is_knocked_out):
-        super().__init__(name, level, type, current_health, is_knocked_out)
+    def __init__(self, pokemons, trainer_name, num_of_potions, active_pokemon):
+        #super().__init__(name, level, type, current_health, is_knocked_out)
         self.pokemons = pokemons
         self.trainer_name = trainer_name
         self.num_of_potions = num_of_potions
@@ -90,7 +89,6 @@ class Trainer(Pokemon):
 
 
 
-
 charmander = Pokemon('charmander', 7, 'fire', False)
 bulbasaur = Pokemon('bulbasaur', 9, 'grass', False)
 squirtle = Pokemon('squirtle', 11, 'water', False)
@@ -101,4 +99,4 @@ growlithe = Pokemon('growlithe', 7, 'fire', False)
 Ash_keczap = Trainer([charmander, bulbasaur, squirtle], "Ash", 3, 1)
 justin_timberlake = Trainer([celebi, lapras, growlithe], "Justin", 3, 1)
 
-
+Ash_keczap.attack_trainer(justin_timberlake)
