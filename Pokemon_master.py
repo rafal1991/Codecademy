@@ -8,9 +8,7 @@ class Pokemon:
         self.is_knocked_out = is_knocked_out
         self.trainer_name = None
 
-
     def lose_health(self, health_loss):
-
         print("{name} had {health}/{max_health} health before damage".format(name=self.name, health=self.current_health, max_health=self.maximum_health))
         self.current_health = self.current_health - health_loss
         print("{name} now has {health}/{max_health} health \n".format(name=self.name, health=self.current_health, max_health=self.maximum_health))
@@ -27,11 +25,12 @@ class Pokemon:
         if self.current_health <= 0:
             self.is_knocked_out = True
             print("{name} is now knocked out".format(name=self.name))
+            return self.is_knocked_out
 
     def revive(self):
-        if self.current_health <= 0:
-            self.is_knocked_out = False
-            print(self.is_knocked_out)
+        self.is_knocked_out = False
+        print(self.is_knocked_out)
+        return self.is_knocked_out
 
     def attack(self, opposite_pokemon):
         self.opposite_pokemon = opposite_pokemon
@@ -69,8 +68,15 @@ class Trainer():
         self.trainer_name = trainer_name
         self.num_of_potions = num_of_potions
         self.active_pokemon = self.pokemons[active_pokemon -1]
-        for pokemon in pokemons:
+        self.knocked_out_pokemons = []
+
+        #assigning trainer name to pokemon and classifying which pokemon is knocked out
+        for pokemon in self.pokemons:
             pokemon.trainer_name = self.trainer_name
+            if pokemon.is_knocked_out == True:
+                self.knocked_out_pokemons.append(pokemon)
+                self.pokemons.remove(pokemon)
+
 
 
     def use_potion(self):
@@ -78,22 +84,26 @@ class Trainer():
         # heals active pokemon
         print(self.trainer_name)
         amount_of_healing = 20
-        potion_healing = self.active_pokemon.regain_health(amount_of_healing)
-        potion_healing
+        self.active_pokemon.regain_health(amount_of_healing)
         self.num_of_potions += -1
         print("{trainer_name}'s {pokemon} has been heald by {healing} \n".format(trainer_name=self.trainer_name, pokemon=self.active_pokemon.name, healing=amount_of_healing))
 
     def attack_trainer(self, trainer_to_attack):
         # give damage to another trainer's active pokemon
-        pokemon_we_attack = trainer_to_attack.active_pokemon
-        attack_damage = self.active_pokemon.attack(pokemon_we_attack)
-        pokemon_we_attack.lose_health(attack_damage)
-
+        if self.active_pokemon.is_knocked_out == True:
+            print("{pokemon} is knocked out and can't fight anymore".format(pokemon=self.active_pokemon.name))
+        else:
+            pokemon_we_attack = trainer_to_attack.active_pokemon
+            attack_damage = self.active_pokemon.attack(pokemon_we_attack)
+            pokemon_we_attack.lose_health(attack_damage)
 
     def switch_pokemon(self, pokemon_number):
         print(self.trainer_name)
-        self.active_pokemon = self.pokemons[pokemon_number - 1]
-        print("{trainer} chose {name}\n".format(trainer=self.trainer_name, name=self.active_pokemon.name))
+        if self.pokemons[pokemon_number - 1].is_knocked_out == True:
+            print("{pokemon} is knocked out and you can't choose it".format(pokemon=self.pokemons[pokemon_number - 1].name))
+        else:
+            self.active_pokemon = self.pokemons[pokemon_number - 1]
+            print("{trainer} chose {name}\n".format(trainer=self.trainer_name, name=self.active_pokemon.name))
 
 
 
@@ -114,6 +124,16 @@ justin_timberlake = Trainer([celebi, lapras, growlithe], "Justin", 3, 1)
 
 Ash_keczap.attack_trainer(justin_timberlake)
 justin_timberlake.switch_pokemon(3)
-Ash_keczap.attack_trainer((justin_timberlake))
+Ash_keczap.attack_trainer(justin_timberlake)
 justin_timberlake.attack_trainer(Ash_keczap)
 Ash_keczap.use_potion()
+justin_timberlake.attack_trainer(Ash_keczap)
+Ash_keczap.attack_trainer(justin_timberlake)
+justin_timberlake.attack_trainer(Ash_keczap)
+Ash_keczap.attack_trainer(justin_timberlake)
+justin_timberlake.attack_trainer(Ash_keczap)
+Ash_keczap.attack_trainer(justin_timberlake)
+justin_timberlake.attack_trainer(Ash_keczap)
+Ash_keczap.attack_trainer(justin_timberlake)
+justin_timberlake.attack_trainer(Ash_keczap)
+Ash_keczap.attack_trainer(justin_timberlake)
